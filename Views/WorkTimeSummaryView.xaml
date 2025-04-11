@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="LiveChartPlay.Views.WorkTimeSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <TextBlock Text="{Binding SummaryText.Value}" 
+                   FontSize="16" 
+                   Margin="10"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

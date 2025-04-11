@@ -1,0 +1,69 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code settings
+.vscode/
+.vs/
+
+## Rider
+.idea/
+
+## Backup & Cache
+*.cache
+*.bak
+*.orig
+*.tmp
+
+## WPF specific
+*.g.*
+*.i.cs
+*.xaml.cs~  # XAML temp files
+Generated_Code/
+
+## Logs
+*.log
+
+## Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+*.testsettings
+
+## Packages
+*.nupkg
+# NuGet Packages Directory
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+## DotNet tools
+.dotnet/
+.nuget/
+*.snupkg
+
+## Configuration files
+appsettings.*.json
+
+## Database
+*.mdf
+*.ldf
+*.db
+
+## User-specific files
+*.suo
+*.user
+*.vspscc
+*.vssscc
+
+## Visual Studio 2019+
+.vs/
+
+## Avalonia or MaterialDesignThemes temp
+Themes/Generated/*

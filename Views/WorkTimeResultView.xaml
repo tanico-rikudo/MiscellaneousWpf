@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="LiveChartPlay.Views.WorkTimeResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <StackPanel Margin="10">
+        <TextBox Text="{Binding ResultText.Value}" IsReadOnly="True" Margin="0,5"/>
+
+        <ListBox ItemsSource="{Binding WorkHistory}" Margin="0,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding StartDatetime}" Width="150"/>
+                        <TextBlock Text=" --> " Width="30"/>
+                        <TextBlock Text="{Binding EndDatetime}" Width="150"/>
+                        <TextBlock Text="{Binding WorkingMinutes}" Width="80"/>
+                        <TextBlock Text="{Binding Comment}" Width="200"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <DataGrid ItemsSource="{Binding WorkHistory}"
+                  AutoGenerateColumns="False"
+                  materialDesign:DataGridAssist.CellPadding="10"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="10"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionMode="Single"
+                  Style="{StaticResource MaterialDesignDataGrid}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start" Binding="{Binding StartDatetime, StringFormat=yyyy/MM/dd HH:mm}" Width="*"/>
+                <DataGridTextColumn Header="End" Binding="{Binding EndDatetime, StringFormat=yyyy/MM/dd HH:mm}" Width="*"/>
+                <DataGridTextColumn Header="Workhour" Binding="{Binding WorkingMinutes}" Width="*"/>
+                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
