@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="ControlzEx" Version="7.0.1-rc0014" />
     <PackageReference Include="DevExpress.Xpo" Version="24.2.3" />
     <PackageReference Include="Dirkster.AvalonDock" Version="4.72.1" />
     <PackageReference Include="Dirkster.AvalonDock.Themes.Expression" Version="4.72.1" />
@@ -27,6 +28,7 @@
     <PackageReference Include="LiveChartsCore" Version="2.0.0-rc5.4" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-rc5.4" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc5.4" />
+    <PackageReference Include="MahApps.Metro" Version="3.0.0-rc0516" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.2-ci942" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.2-ci942" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.2.2-ci942" />
@@ -42,6 +44,20 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0-dev-02301" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\otani\Dropbox\apps\MiscellaneousWpf\MiscellaneousWpf\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\otani\Dropbox\apps\MiscellaneousWpf\MiscellaneousWpf\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MainWindowMaterialDesign.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 

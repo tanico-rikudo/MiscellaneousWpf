@@ -49,8 +49,6 @@ namespace LiveChartPlay.ViewModels
         //ここでは「タイマー処理を停止したいときのために保持」している
         private CompositeDisposable _disposables = new();
 
-        private readonly AutoGeneratorService _autoGenService;
-
         private readonly IWorkTimeCalculator _calculator;
         private readonly IMessengerService _messenger;
         private readonly IAppStateService _appStateService;

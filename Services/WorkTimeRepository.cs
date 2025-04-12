@@ -21,6 +21,7 @@ namespace LiveChartPlay.Services
         public WorkTimeRepository(IConfiguration configuration, IMessengerService messenger)
             : base(configuration.GetConnectionString("Default"), messenger)
         {
+            _messenger = messenger;
         }
 
         public async Task<List<WorkTime>> GetWorkTimesAsync()
@@ -48,7 +49,7 @@ namespace LiveChartPlay.Services
             catch (Exception ex)
             {
                 Log.Error(ex, "Read Error");
-                Messenger?.Publish("DB error");
+                _messenger?.Publish("DB error");
             }
 
             return result;

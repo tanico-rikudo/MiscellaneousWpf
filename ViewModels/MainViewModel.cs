@@ -52,6 +52,7 @@ namespace LiveChartPlay.ViewModels
                 viewHostService,
                 workTimeRepository
                 );
+            Log.Information("Generated main view model chain");
 
         }
     }

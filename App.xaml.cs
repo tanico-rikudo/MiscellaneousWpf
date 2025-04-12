@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Prism.Ioc;
 using LiveChartPlay.Helpers;
+using System.Windows.Documents;
 
 
 namespace LiveChartPlay
@@ -17,13 +18,14 @@ namespace LiveChartPlay
     /// </summary>
     public partial class App : PrismApplication
     {
+        public bool _isLoginSuccess = false;
         public App()
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .WriteTo.Debug()
-                .WriteTo.File("logs\\log.txt", 
+                .WriteTo.File("logs\\log.txt",
                 rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
@@ -31,11 +33,47 @@ namespace LiveChartPlay
 
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            if (Application.Current.MainWindow != null)
+            {
+                Log.Information("MainWindow is assigned");
+            }
+            else
+            {
+                Log.Error("MainWindow is null after initialization.");
+                Application.Current.Shutdown();
+            }
+
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            AppDomain.CurrentDomain.UnhandledException += (s, ev) =>
+            {
+                var ex = (Exception)ev.ExceptionObject;
+                Log.Fatal(ex, "unhandled exception");
+                MessageBox.Show($"unhandled : {ex.Message}");
 
+            };
 
-            base.OnStartup(e);
+            try
+            {
+                Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                base.OnStartup(e);
+
+                Application.Current.Exit += (s, ev) =>
+                {
+                    Log.Warning("Application.Exit event fired");
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Startup Exception");
+                MessageBox.Show($"Fatal error: {ex.Message}");
+            }
+
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -47,9 +85,33 @@ namespace LiveChartPlay
 
         protected override Window CreateShell()
         {
-            // // ← ここで MainWindow の依存をDIで解決！
-            return Container.Resolve<MainWindow>();
+            Log.Information("CreateShell() called");
+
+            var windowService = Container.Resolve<IWindowService>();
+            var loginService = Container.Resolve<ILoginService>();
+            var appState = Container.Resolve<IAppStateService>();
+
+            var loginViewModel = new LoginViewModel(loginService, appState);
+
+            var result = windowService.ShowDialogWindow<LoginWindow, LoginViewModel>(loginViewModel);
+
+            if (result != true  || !appState.IsAuthenticated)
+            {
+                Log.Warning("Login failed or canceled. Returning null");
+                return null!;
+            }
+
+            Log.Information("Login succeeded. Resolving MainWindow");
+            var mainWindow = Container.Resolve<MainWindow>();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            mainWindow.Closed += (s, e) =>
+            {
+                Log.Warning("MainWindow.Closed fired");
+            };
+
+            return mainWindow;
         }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             var config = ConfigurationBuilderHelper.BuildConfiguration();
@@ -59,11 +121,12 @@ namespace LiveChartPlay
             // サービス登録
             containerRegistry.Register<IWorkTimeCalculator, WorkTimeCalculator>();
 
+
             // Singleton
             containerRegistry.Register<IMessengerService, MessengerService>();
             containerRegistry.RegisterSingleton<IEventAggregator, EventAggregator>();
             containerRegistry.RegisterSingleton<IAppStateService, AppStateService>();
-
+            containerRegistry.RegisterSingleton<ILoginService, LoginService>();
             // でもその時点では、まだ MainWindow のインスタンスは生成されていないためDockManager にアクセスできないのです。
             // Viewで手動入れ込み
             containerRegistry.RegisterSingleton<IDocumentService, DocumentService>();
@@ -84,9 +147,6 @@ namespace LiveChartPlay
 
             //var connectionString = "Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=postgres";
             containerRegistry.Register<IWorkTimeRepository, WorkTimeRepository>();
-
-
-
         }
     }
 

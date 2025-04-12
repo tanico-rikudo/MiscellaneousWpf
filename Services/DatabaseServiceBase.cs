@@ -1,15 +1,17 @@
-﻿using LiveChartPlay.Services;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using LiveChartPlay.Services;
 using Npgsql;
+using Serilog;
 
 public abstract class DatabaseServiceBase
 {
-    protected readonly string ConnectionString;
-    protected readonly IMessengerService Messenger;
+    protected readonly string _connectionString;
+    protected readonly IMessengerService _messenger;
 
     protected DatabaseServiceBase(string connectionString, IMessengerService messenger)
     {
-        ConnectionString = connectionString;
-        Messenger = messenger;
+        _connectionString = connectionString;
+        _messenger = messenger;
     }
 
 
@@ -17,13 +19,14 @@ public abstract class DatabaseServiceBase
     {
         try
         {
-            var conn = new NpgsqlConnection(ConnectionString);
+            var conn = new NpgsqlConnection(_connectionString);
             await conn.OpenAsync();
             return conn;
         }
         catch (Exception ex)
         {
-            Messenger?.Publish("Failure DB connection");
+            _messenger?.Publish("Failure DB connection {}");
+            Log.Information(ex.ToString());
             throw; // Re-throw
         }
     }

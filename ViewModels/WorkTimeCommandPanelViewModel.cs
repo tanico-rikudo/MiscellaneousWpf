@@ -39,7 +39,6 @@ namespace LiveChartPlay.ViewModels
         private readonly IMessengerService _messengerService;
         private readonly IViewHostService _viewHostService;
         private readonly IAppStateService _appStateService;
-        private readonly IDocumentService _documentService;
         private readonly IWorkTimeRepository _workTimeRepository;
 
 
@@ -64,15 +63,21 @@ namespace LiveChartPlay.ViewModels
                 var randomRecord = WorkTimeFactory.CreateRandom();
                 _appStateService.WorkHistory.Add(randomRecord);
             });
+            Log.Information("Loaded AddRandomRecordCommand");
+
 
             //auto gen
             _autoGenService = new AutoGeneratorService(_appStateService.WorkHistory, messengerService, calculator);
             StartAutoGenerateCommand = new ReactiveCommand();
             StartAutoGenerateCommand.Subscribe(_ => _autoGenService.Start());
-                
+            Log.Information("Loaded StartAutoGenerateCommand");
+
+
             // stop gen
             StopAutoGenerateCommand = new ReactiveCommand();
             StopAutoGenerateCommand.Subscribe(_ => _autoGenService.Stop());
+            Log.Information("Loaded StopAutoGenerateCommand");
+
 
             // show summary view
             OpenSummaryWindowCommand = new ReactiveCommand();
@@ -82,6 +87,8 @@ namespace LiveChartPlay.ViewModels
                 viewHostService.ShowInWindow<WorkTimeSummaryView>(summaryViewModel);
                 appStateService.DocumentService?.ShowDocument("summary");
             });
+            Log.Information("Loaded OpenSummaryWindowCommand");
+
 
             // show summary view
             OpenChartWindowCommand = new ReactiveCommand();
@@ -92,6 +99,8 @@ namespace LiveChartPlay.ViewModels
                 appStateService.DocumentService?.ShowDocument("chart");
             }
             );
+            Log.Information("Loaded OpenChartWindowCommand");
+
             LoadFromDatabaseCommand = new ReactiveCommand();
             LoadFromDatabaseCommand.Subscribe(async _ =>
             {
@@ -110,6 +119,7 @@ namespace LiveChartPlay.ViewModels
                     Log.Error(ex, "[MainViewModel] Failed to load data from database.");
                 }
             });
+            Log.Information("Loaded LoadFromDatabaseCommand");
 
 
         }
