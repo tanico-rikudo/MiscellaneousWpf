@@ -26,33 +26,20 @@ namespace LiveChartPlay.Services
 
         public async Task<List<WorkTime>> GetWorkTimesAsync()
         {
-            var result = new List<WorkTime>();
-
-            try
-            {
-                using var conn = await CreateOpenConnectionAsync();
-                var cmd = new NpgsqlCommand("SELECT start_time, end_time, comment FROM work_times", conn);
-                using var reader = await cmd.ExecuteReaderAsync();
-
-                while (await reader.ReadAsync())
+            return await ExecuteReaderAsync(
+                "SELECT start_time, end_time, comment FROM work_times",
+                reader =>
                 {
                     var start = reader.GetDateTime(0);
                     var end = reader.GetDateTime(1);
                     var comment = reader.IsDBNull(2) ? string.Empty : reader.GetString(2);
 
-                    result.Add(new WorkTime(start, end, comment)
+                    return new WorkTime(start, end, comment)
                     {
                         WorkingMinutes = (int)(end - start).TotalMinutes
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Read Error");
-                _messenger?.Publish("DB error");
-            }
+                    };
+                });
 
-            return result;
         }
     }
 }

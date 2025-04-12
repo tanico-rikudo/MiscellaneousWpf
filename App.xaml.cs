@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Prism.Ioc;
 using LiveChartPlay.Helpers;
 using System.Windows.Documents;
+using LiveChartPlay.Models;
 
 
 namespace LiveChartPlay
@@ -48,7 +49,7 @@ namespace LiveChartPlay
 
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             AppDomain.CurrentDomain.UnhandledException += (s, ev) =>
             {
@@ -61,7 +62,13 @@ namespace LiveChartPlay
             try
             {
                 Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+
+                Log.Information("on Startup...");
                 base.OnStartup(e);
+                Log.Information("end on Startup");
+
+                var userRepo = Container.Resolve<IUserRepository>();
+                await InitializeUsersAsync(userRepo);
 
                 Application.Current.Exit += (s, ev) =>
                 {
@@ -147,7 +154,31 @@ namespace LiveChartPlay
 
             //var connectionString = "Host=localhost;Port=5432;Username=postgres;Password=postgres;Database=postgres";
             containerRegistry.Register<IWorkTimeRepository, WorkTimeRepository>();
+            containerRegistry.Register<IUserRepository, UserRepository>();
         }
+
+        public async Task InitializeUsersAsync(IUserRepository userRepository)
+        {
+            if (!await userRepository.AnyUsersAsync())
+            {
+                var testUser = new UserInfo(
+                    username: "admin",
+                    password: PasswordHasher.HashPassword("password"), 
+                    email: "admin@example.com",
+                    role: UserRole.Admin | UserRole.Editor | UserRole.Viewer //all 
+                );
+
+                await userRepository.InsertUserAsync(testUser);
+
+                Serilog.Log.Information("Admin user created: admin / password");
+            }
+            else
+            {
+                Log.Information("There is users ");
+
+            }
+        }
+
     }
 
 }

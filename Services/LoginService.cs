@@ -1,4 +1,5 @@
-﻿using LiveChartPlay.Models;
+﻿using LiveChartPlay.Helpers;
+using LiveChartPlay.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,39 @@ namespace LiveChartPlay.Services
     }
     public class LoginService : ILoginService
     {
+        private readonly IUserRepository _userRepository;
 
-        public Task<UserInfo?> AuthenticateAsync(string username, string password)
+        public LoginService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+        public async Task<UserInfo?> AuthenticateAsync(string username, string password)
         {
             Log.Information($"{username} - {password}");
-            if (!string.IsNullOrWhiteSpace(username) && password == "password")
+
+
+
+            if (String.IsNullOrEmpty(username))
             {
-                return Task.FromResult<UserInfo?>(new UserInfo(username    , $"{username}@example.com", "User", password ));
+                var bypassUser = new UserInfo(
+                    "admin",
+                    "admin",
+                    "admin",
+                    UserRole.Admin
+                );
+                return bypassUser;
             }
 
-            return Task.FromResult<UserInfo?>(null);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+
+
+            if (user != null&& PasswordHasher.VerifyPassword(password, user.Password))
+            {
+                return user;
+
+            }
+
+            return null;
         }
     }
 

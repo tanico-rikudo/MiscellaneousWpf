@@ -56,7 +56,7 @@ namespace LiveChartPlay.ViewModels
                     Name = "Date",  
                     Labels = labels,
                     LabelsRotation = 15,
-                    Labeler = (value) => value.ToString("C")
+                    Labeler = (value) => value.ToString("MM/dd")
                 }
             };
 

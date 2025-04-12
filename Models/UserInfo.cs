@@ -10,18 +10,18 @@ namespace LiveChartPlay.Models
     public class UserInfo
     {
         [Required]
-        public string Username { get; set; }
-        
-        [Required]
-        public string Password { get; set; }
-        
-        [Required]
-        public string Email { get; set; }
-        
-        [Required]
-        public string Role { get; set; }
+        public string Username { get; set; } = string.Empty;
 
-        public UserInfo(string username, string password, string email, string role)
+        [Required]
+        public string Password { get; set; } = string.Empty;
+
+        [Required]
+        public string Email { get; set; } = string.Empty;
+
+        [Required]
+        public UserRole Role { get; set; } = UserRole.None;
+
+        public UserInfo(string username, string password, string email, UserRole role)
         {
             Username = username;
             Email = email;

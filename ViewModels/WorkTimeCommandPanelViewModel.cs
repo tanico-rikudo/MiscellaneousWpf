@@ -27,6 +27,8 @@ namespace LiveChartPlay.ViewModels
 
         public ReactiveCommand LoadFromDatabaseCommand { get; }
 
+        public ReactiveProperty<bool> IsBusy { get; } = new ReactiveProperty<bool>(false);
+
 
         //複数の IDisposable（＝購読オブジェクト）をまとめて管理する入れ物
         //必要になったら.Dispose() で一括停止できる
@@ -106,6 +108,8 @@ namespace LiveChartPlay.ViewModels
             {
                 try
                 {
+                    IsBusy.Value = true;
+                    await Task.Delay(1000); //sleep 10sec
                     (await _workTimeRepository.GetWorkTimesAsync())
                      .ForEach(record => _appStateService.WorkHistory.Add(record));
                     //WorkHistory.Clear();
@@ -117,6 +121,10 @@ namespace LiveChartPlay.ViewModels
                 catch (Exception ex)
                 {
                     Log.Error(ex, "[MainViewModel] Failed to load data from database.");
+                }
+                finally
+                {
+                    IsBusy.Value = false;
                 }
             });
             Log.Information("Loaded LoadFromDatabaseCommand");

@@ -30,4 +30,54 @@ public abstract class DatabaseServiceBase
             throw; // Re-throw
         }
     }
+
+    protected async Task<List<T>> ExecuteReaderAsync<T>(
+    string sql,
+    Func<NpgsqlDataReader, T> mapFunc,
+    params NpgsqlParameter[] parameters)
+    {
+        try
+        {
+            using var conn = await CreateOpenConnectionAsync();
+            using var cmd = new NpgsqlCommand(sql, conn);
+
+            if (parameters != null && parameters.Length > 0)
+                cmd.Parameters.AddRange(parameters);
+
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            var result = new List<T>();
+            while (await reader.ReadAsync())
+            {
+                result.Add(mapFunc(reader));
+            }
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _messenger?.Publish("DB Error");
+            Log.Error(ex, $"Error executing SQL: {sql}");
+            return new List<T>(); // or throw, based on your app policy
+        }
+    }
+
+    protected async Task<int> ExecuteNonQueryAsync(string sql, params NpgsqlParameter[] parameters)
+    {
+        try
+        {
+            using var conn = await CreateOpenConnectionAsync();
+            using var cmd = new NpgsqlCommand(sql, conn);
+            cmd.Parameters.AddRange(parameters);
+            return await cmd.ExecuteNonQueryAsync();
+        }
+        catch (Exception ex)
+        {
+            _messenger?.Publish("DB Error");
+            Log.Error(ex, $"Error executing SQL: {sql}");
+            return 0;
+        }
+    }
+
+
+
 }
