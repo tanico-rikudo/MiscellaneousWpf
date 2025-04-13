@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using LiveChartPlay.Models;
-using MaterialDesignThemes.Wpf;
 using Reactive.Bindings.Extensions;
 using Serilog;
 
-namespace LiveChartPlay.Services
+using LiveChartPlay.Services.Core;
+
+
+namespace LiveChartPlay.Services.WorkTimeProcess
 {
     public class AutoGeneratorService
     {

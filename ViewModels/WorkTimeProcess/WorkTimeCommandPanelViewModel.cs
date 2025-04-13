@@ -1,17 +1,17 @@
 ﻿using Reactive.Bindings;
 
 using LiveChartPlay.Models;
-using LiveChartPlay.Services;
+using LiveChartPlay.Views.WorkTimeProcess;
+
+using LiveChartPlay.Services.UI;
+using LiveChartPlay.Services.Core;
+using LiveChartPlay.Services.WorkTimeProcess;
 
 using Serilog;
 using System.Reactive.Linq;
-using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 
-using MaterialDesignThemes.Wpf;
-using LiveChartPlay.Views;
-
-namespace LiveChartPlay.ViewModels
+namespace LiveChartPlay.ViewModels.WorkTimeProcess
 {
     public class WorkTimeCommandPanelViewModel: BindableBase
     {

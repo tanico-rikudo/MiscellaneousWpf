@@ -1,7 +1,6 @@
-﻿using LiveChartPlay.ViewModels;
-using System.Windows.Controls;
+﻿using UserControl = System.Windows.Controls.UserControl;
 
-namespace LiveChartPlay.Views
+namespace LiveChartPlay.Views.WorkTimeProcess
 {
     /// <summary>
     /// SummaryView.xaml の相互作用ロジック

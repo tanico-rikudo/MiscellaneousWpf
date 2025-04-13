@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LiveChartPlay.Services;
-using Prism.Mvvm;
-using Reactive.Bindings;
+﻿using Reactive.Bindings;
+using LiveChartPlay.Services.Core;
 
-namespace LiveChartPlay.ViewModels
+namespace LiveChartPlay.ViewModels.WorkTimeProcess
 {
     public class WorkTimeSummaryViewModel: BindableBase
     {

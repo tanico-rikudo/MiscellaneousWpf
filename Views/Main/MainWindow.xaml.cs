@@ -1,11 +1,20 @@
 ﻿using System.Windows;
-using LiveChartPlay.Services;
-using LiveChartPlay.ViewModels;
 using MaterialDesignThemes.Wpf;
 using MahApps.Metro.Controls;
 using Serilog;
+using LiveChartPlay.Views.WorkTimeProcess;
 
-namespace LiveChartPlay.Views
+using LiveChartPlay.Services.UI;
+using LiveChartPlay.Services.Core;
+using LiveChartPlay.Services.Document;
+
+using LiveChartPlay.ViewModels.Main;
+using LiveChartPlay.ViewModels.WorkTimeProcess;
+
+using MessageBox = System.Windows.MessageBox;
+
+
+namespace LiveChartPlay.Views.Main
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

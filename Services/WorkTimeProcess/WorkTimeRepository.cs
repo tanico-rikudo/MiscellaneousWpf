@@ -1,13 +1,9 @@
 ﻿using LiveChartPlay.Models;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Npgsql;
-using LiveChartPlay.Services;
 using Microsoft.Extensions.Configuration;
+using UserControl = System.Windows.Controls.UserControl;
+using LiveChartPlay.Services.Core;
 
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.WorkTimeProcess
 {
     public interface IWorkTimeRepository
     {
@@ -16,12 +12,10 @@ namespace LiveChartPlay.Services
 
     public class WorkTimeRepository : DatabaseServiceBase, IWorkTimeRepository
     {
-        private readonly IMessengerService _messenger;
 
         public WorkTimeRepository(IConfiguration configuration, IMessengerService messenger)
             : base(configuration.GetConnectionString("Default"), messenger)
         {
-            _messenger = messenger;
         }
 
         public async Task<List<WorkTime>> GetWorkTimesAsync()

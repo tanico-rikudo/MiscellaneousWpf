@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using UserControl = System.Windows.Controls.UserControl;
 
-namespace LiveChartPlay.Views
+namespace LiveChartPlay.Views.WorkTimeProcess
 {
     /// <summary>
     /// WorkTimeCommandPanelView.xaml の相互作用ロジック

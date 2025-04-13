@@ -1,13 +1,12 @@
 ﻿using LiveChartPlay.Helpers;
 using LiveChartPlay.Models;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LiveChartPlay.Services
+using LiveChartPlay.Services.User;
+
+
+
+namespace LiveChartPlay.Services.Auth
 {
     public interface ILoginService
     {

@@ -1,13 +1,9 @@
 ﻿using LiveChartPlay.Models;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LiveChartPlay.Services.Document;
 
-namespace LiveChartPlay.Services
+
+namespace LiveChartPlay.Services.UI
 {
 
     public interface IAppStateService 

@@ -5,25 +5,18 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
 using LiveChartPlay.Models;
-using LiveChartPlay.Services;
 using LiveChartPlay.Attributes;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView.VisualElements;
-using LiveChartsCore.SkiaSharpView.Extensions;
-
 using Serilog;
 using System.Reactive.Linq;
-using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
 
 using MaterialDesignThemes.Wpf;
-using LiveChartPlay.Views;
-using System.Xml.Linq;
 
+using LiveChartPlay.Services.UI;
+using LiveChartPlay.Services.Core;
+using LiveChartPlay.Services.WorkTimeProcess;
 
-namespace LiveChartPlay.ViewModels
+namespace LiveChartPlay.ViewModels.WorkTimeProcess
 {
     public class WorkTimeInputViewModel: BindableBase
     {

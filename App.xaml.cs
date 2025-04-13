@@ -1,15 +1,30 @@
 ﻿using Serilog;
-using Prism.Unity;
-using LiveChartPlay.Views;
-using LiveChartPlay.Services;
 using System.Windows;
-using LiveChartPlay.ViewModels;
-using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
-using Prism.Ioc;
+
+using LiveChartPlay.Views.Auth;
+using LiveChartPlay.Views.Controls;
+using LiveChartPlay.Views.Main;
+using LiveChartPlay.Views.WorkTimeProcess;
+
+using LiveChartPlay.Services.Auth;
+using LiveChartPlay.Services.UI;
+using LiveChartPlay.Services.Core;
+using LiveChartPlay.Services.Document;
+using LiveChartPlay.Services.User;
+using LiveChartPlay.Services.WorkTimeProcess;
+
+using LiveChartPlay.ViewModels.Auth;
+using LiveChartPlay.ViewModels.Main;
+using LiveChartPlay.ViewModels.WorkTimeProcess;
+
 using LiveChartPlay.Helpers;
-using System.Windows.Documents;
 using LiveChartPlay.Models;
+using MessageBox = System.Windows.Forms.MessageBox;
+using Application = System.Windows.Application;
+using UserControl = System.Windows.Controls.UserControl;
+
+
 
 
 namespace LiveChartPlay

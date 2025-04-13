@@ -1,7 +1,6 @@
 ﻿
-using System;
 using LiveChartPlay.Models;
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.WorkTimeProcess
 {
     public static  class WorkTimeFactory
     {

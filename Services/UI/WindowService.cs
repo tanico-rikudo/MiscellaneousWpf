@@ -1,14 +1,9 @@
-﻿using DevExpress.Office;
-using LiveChartPlay.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+
+using LiveChartPlay.ViewModels.Auth;
 
 
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.UI
 {
     public interface IWindowService
     {

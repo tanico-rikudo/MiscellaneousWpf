@@ -1,13 +1,10 @@
 ﻿using LiveChartPlay.Models;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LiveChartPlay.Services.Core;
 
-namespace LiveChartPlay.Services
+
+namespace LiveChartPlay.Services.User
 {
     
     public interface IUserRepository
@@ -21,12 +18,10 @@ namespace LiveChartPlay.Services
     }
     public class UserRepository: DatabaseServiceBase, IUserRepository
     {
-        private readonly IMessengerService _messenger;
 
         public UserRepository(IConfiguration configuration, IMessengerService messenger)
             : base(configuration.GetConnectionString("Default"), messenger)
         {
-            _messenger = messenger;
         }
 
         public async Task<List<UserInfo>> GetAllUsersAsync()

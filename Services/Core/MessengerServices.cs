@@ -1,7 +1,5 @@
 ﻿
-using Prism.Events;
-using System;
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.Core
 {
 
     public interface IMessengerService

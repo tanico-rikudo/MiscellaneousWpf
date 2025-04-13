@@ -1,10 +1,9 @@
 ﻿using AvalonDock;
 using AvalonDock.Layout;
 using Serilog;
-using System.Diagnostics;
-using System.Windows.Controls;
+using UserControl = System.Windows.Controls.UserControl;
 
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.Document
 {
     public interface IDocumentService
     {

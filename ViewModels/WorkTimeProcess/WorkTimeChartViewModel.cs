@@ -1,17 +1,12 @@
 ﻿using LiveChartPlay.Models;
-using LiveChartPlay.Services;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using Prism.Mvvm;
 using Reactive.Bindings;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
+using LiveChartPlay.Services.UI;
 
-namespace LiveChartPlay.ViewModels
+namespace LiveChartPlay.ViewModels.WorkTimeProcess
 {
     public class WorkTimeChartViewModel : BindableBase
     {

@@ -1,11 +1,6 @@
 ﻿using LiveChartPlay.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LiveChartPlay.Services
+namespace LiveChartPlay.Services.WorkTimeProcess
 {
     public interface IWorkTimeCalculator
     {

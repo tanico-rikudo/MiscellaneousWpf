@@ -3,6 +3,23 @@ using LiveChartPlay.Services;
 using Npgsql;
 using Serilog;
 
+using LiveChartPlay.Views.Auth;
+using LiveChartPlay.Views.Controls;
+using LiveChartPlay.Views.Main;
+using LiveChartPlay.Views.WorkTimeProcess;
+
+using LiveChartPlay.Services.Auth;
+using LiveChartPlay.Services.UI;
+using LiveChartPlay.Services.Core;
+using LiveChartPlay.Services.Document;
+using LiveChartPlay.Services.User;
+using LiveChartPlay.Services.WorkTimeProcess;
+
+using LiveChartPlay.ViewModels.Auth;
+using LiveChartPlay.ViewModels.Main;
+using LiveChartPlay.ViewModels.WorkTimeProcess;
+
+
 public abstract class DatabaseServiceBase
 {
     protected readonly string _connectionString;
