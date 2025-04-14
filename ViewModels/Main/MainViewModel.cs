@@ -20,11 +20,13 @@ namespace LiveChartPlay.ViewModels.Main
             IMessengerService messengerService,
             IAppStateService appStateService,
             IViewHostService viewHostService,
-            IWorkTimeRepository workTimeRepository
+            IWorkTimeRepository workTimeRepository,
+            IExportService exportService
             )
         {
             ResultViewModel = new WorkTimeResultViewModel(messengerService,
-                appStateService);
+                appStateService,
+                exportService);
             InputViewModel = new WorkTimeInputViewModel(calculator,
                 messengerService,
                 appStateService);

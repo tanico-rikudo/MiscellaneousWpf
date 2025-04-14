@@ -149,6 +149,7 @@ namespace LiveChartPlay
             containerRegistry.RegisterSingleton<IEventAggregator, EventAggregator>();
             containerRegistry.RegisterSingleton<IAppStateService, AppStateService>();
             containerRegistry.RegisterSingleton<ILoginService, LoginService>();
+            containerRegistry.RegisterSingleton<IExportService, ExportService>();
             // でもその時点では、まだ MainWindow のインスタンスは生成されていないためDockManager にアクセスできないのです。
             // Viewで手動入れ込み
             containerRegistry.RegisterSingleton<IDocumentService, DocumentService>();
